@@ -91,7 +91,7 @@ public class ReqresStepDefinitions {
         SerenityRest.when().delete(ReqresAPI.DELETE_USER);
     }
 
-    @Then("Status code should be {int} No content")
+    @Then("Status code should be {int}")
     public void statusCodeShouldBeNoContent(int intNoContent) {
        SerenityRest.then().statusCode(intNoContent);
     }

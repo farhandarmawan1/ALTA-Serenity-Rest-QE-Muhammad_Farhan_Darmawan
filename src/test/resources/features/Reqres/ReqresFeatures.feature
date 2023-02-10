@@ -31,9 +31,11 @@ Feature: Reqres API Automation Testing QE-9
   Scenario Outline: Delete user with valid parameter id
     Given Delete user with valid id <id>
     When Send request delete user
-    Then Status code should be 204 No content
+    Then Status code should be 204
     Examples:
       | id |
       | 1 |
       | 2 |
+
+
 
