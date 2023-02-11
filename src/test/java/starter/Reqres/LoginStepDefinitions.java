@@ -16,20 +16,18 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginStepDefinitions {
     @Steps
     ReqresAPI reqresAPI;
-    @Given("User login with valid username and password")
-    public void userLoginWithValidUsernameAndPassword() {
+
+    @Given("User login with valid email and password")
+    public void userLoginWithValidEmailAndPassword() {
         File json = new File(Constant.JSON_REQ_BODY + "/LoginReqBody.json");
         reqresAPI.setLoginUser(json);
     }
-
 
     @When("Send request login user")
     public void sendRequestLoginUser() {
         SerenityRest.when()
                 .post(ReqresAPI.LOGIN_USER);
-        
     }
-
 
     @And("Validate json schema success login user")
     public void validateJsonSchemaSuccessLoginUser() {
@@ -38,9 +36,9 @@ public class LoginStepDefinitions {
         
     }
 
-    @Given("User login with valid username and blank password")
-    public void userLoginWithValidUsernameAndBlankPassword() {
-        File json = new File(Constant.JSON_REQ_BODY + "/BlankPassword.json");
+    @Given("User login with valid email and empty password")
+    public void userLoginWithValidEmailAndEmptyPassword() {
+        File json = new File(Constant.JSON_REQ_BODY + "/EmptyPasswordLog.json");
         reqresAPI.setLoginUser(json);
         
     }
@@ -58,17 +56,10 @@ public class LoginStepDefinitions {
                 .body(ReqresResponses.ERROR,equalTo(error));
     }
 
-    @Given("User login with blank username and valid password")
-    public void userLoginWithBlankUsernameAndValidPassword() {
-        File json = new File(Constant.JSON_REQ_BODY + "/LoginBlankUsername.json");
+    @Given("User login with empty email and valid password")
+    public void userLoginWithEmptyEmailAndValidPassword() {
+        File json = new File(Constant.JSON_REQ_BODY + "/EmptyEmailLog.json");
         reqresAPI.setLoginUser(json);
-
-    }
-
-    @And("Validate json schema invalid blank username login user")
-    public void validateJsonSchemaInvalidBlankUsernameLoginUser() {
-        File jsonSchema = new File(Constant.JSON_SCHEMA + "/LoginFailedJSONSchema.json");
-        SerenityRest.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(jsonSchema));
 
     }
 }

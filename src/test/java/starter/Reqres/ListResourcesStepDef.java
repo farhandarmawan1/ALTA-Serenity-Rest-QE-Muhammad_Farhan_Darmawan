@@ -16,9 +16,10 @@ public class ListResourcesStepDef {
     @Steps
     ReqresAPI reqresAPI;
 
-    @Given("Get list resources with valid parameter {string}")
-    public void getListUsersWithValidParameterPage(String input) {
-        reqresAPI.getListResources(input);
+    @Given("Get list resources with valid parameter")
+    public void getListUsersWithValidParameterPage() {
+
+        reqresAPI.getListResources("unknown");
     }
 
     @When("Send request get list resources")
@@ -32,5 +33,11 @@ public class ListResourcesStepDef {
         File jsonSchema = new File(Constant.JSON_SCHEMA + "/ListResourcesJSONSchema.json");
         SerenityRest.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(jsonSchema));
 
+    }
+
+    @Given("Get list resources with invalid parameter {string}")
+    public void getListResourcesWithInvalidParameter(String input) {
+
+        reqresAPI.getListResources(input);
     }
 }

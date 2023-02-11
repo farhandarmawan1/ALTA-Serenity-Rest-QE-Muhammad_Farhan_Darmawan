@@ -60,5 +60,9 @@ public class ReqresAPI {
         SerenityRest.given()
                 .pathParam("input", input);
     }
-
+    @Step("Get single resources")
+    public void setSingleResources (int id){
+        SerenityRest.given()
+                .pathParam("id",id);
+    }
 }
