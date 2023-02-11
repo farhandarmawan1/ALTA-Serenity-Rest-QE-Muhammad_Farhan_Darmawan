@@ -20,8 +20,6 @@ public class RegisterStepDefinitions {
         reqresAPI.setLoginUser(json);
     }
 
-
-
     @When("Send request register user")
     public void sendRequestRegisterUser() {
         SerenityRest.when()
@@ -36,9 +34,9 @@ public class RegisterStepDefinitions {
 
     }
 
-    @Given("Register user with valid username and blank password")
-    public void registerUserWithValidUsernameAndBlankPassword() {
-            File json = new File(Constant.JSON_REQ_BODY + "/BlankPassword.json");
+    @Given("Register user with valid email and empty password")
+    public void registerUserWithValidUsernameAndEmptyPassword() {
+            File json = new File(Constant.JSON_REQ_BODY + "/EmptyPasswordReg.json");
             reqresAPI.setLoginUser(json);
     }
 
@@ -46,5 +44,10 @@ public class RegisterStepDefinitions {
     public void validateJsonSchemaFailedRegisterUser() {
         File jsonSchema = new File(Constant.JSON_SCHEMA + "/RegisterInvalidJSONSchema.json");
         SerenityRest.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(jsonSchema));
+    }
+    @Given("Register user with empty email and valid password")
+    public void registerUserWithInvalidUsernameAndValidPassword() {
+        File json = new File(Constant.JSON_REQ_BODY + "/EmptyEmailReg.json");
+        reqresAPI.setLoginUser(json);
     }
 }

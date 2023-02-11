@@ -1,24 +1,24 @@
-Feature: Login User
+Feature:POST Login User
 
-  @Tugas
+  @Tugas @Positive
   Scenario: User login with valid data
-    Given User login with valid username and password
+    Given User login with valid email and password
     When Send request login user
     Then Status code should be 200
     And Validate json schema success login user
 
-  @Tugas
+  @Tugas @Negative
   Scenario: User login with empty password
-    Given User login with valid username and blank password
+    Given User login with valid email and empty password
     When Send request login user
     Then Status code should be 400
     And  Response body name should be "Missing password"
     And Validate json schema failed login user
 
-    @Tugas
-    Scenario: User login With invalid username
-      Given User login with blank username and valid password
+    @Tugas @Negative
+    Scenario: User login with invalid email
+      Given User login with empty email and valid password
       When Send request login user
       Then Status code should be 400
       And Response body name should be "Missing email or username"
-      And Validate json schema invalid blank username login user
+      And Validate json schema failed login user
